@@ -7,10 +7,17 @@
 		"dev": "tsx --env-file=.env.local watch src/server.ts",
 		"build": "tsc",
 		"start": "node dist/server.js",
-		"format": "biome format --write",
 		"format:check": "biome format --check",
-		"lint": "biome lint .",
-		"check": "biome check --apply"
+		"check": "biome check --apply",
+		"lint": "biome check .",
+		"lint:fix": "biome check --write .",
+		"format": "biome format --write .",
+		"prepare": "husky"
+	},
+	"lint-staged": {
+		"*.{ts,tsx,js,jsx,json,jsonc,md,yml,yaml}": [
+			"biome check --write"
+		]
 	},
 	"keywords": [],
 	"author": "Nicolas Teófilo",
@@ -28,6 +35,8 @@
 		"@scalar/fastify-api-reference": "^1.40.9",
 		"fastify": "^5.6.2",
 		"fastify-type-provider-zod": "^6.1.0",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.2.7",
 		"zod": "^4.2.1"
 	}
 }
