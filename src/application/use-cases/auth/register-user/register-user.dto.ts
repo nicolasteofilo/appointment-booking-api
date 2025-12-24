@@ -5,5 +5,5 @@ export interface RegisterUserInput {
 }
 
 export interface RegisterUserOutput {
-	id: string;
+	userId: string;
 }
