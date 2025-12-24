@@ -1,33 +1,7 @@
-import cors from "@fastify/cors";
-import { fastify } from "fastify";
-import { ZodError } from "zod";
-import { AppError } from "@/domain/errors/app-error";
-import { authRoutes } from "./routes/auth.routes";
+import { buildApp } from "@/infrastructure/http/build-app";
+import { authRoutes } from "@/infrastructure/http/routes/auth.routes";
 
-const app = fastify({ logger: true });
-app.register(cors, { origin: true });
-
-// ERROR HANDLER
-app.setErrorHandler((err, _req, reply) => {
-	if (err instanceof ZodError) {
-		return reply.status(400).send({
-			message: "Validation error",
-			issues: err.issues,
-		});
-	}
-
-	if (err instanceof AppError) {
-		return reply.status(err.statusCode).send({
-			message: err.message,
-			code: err.code,
-		});
-	}
-
-	app.log.error(err);
-	return reply.status(500).send({ message: "Internal Server Error" });
-});
-
-// ROUTES
+const app = buildApp();
 app.register(authRoutes, { prefix: "/auth" });
 
 export { app };

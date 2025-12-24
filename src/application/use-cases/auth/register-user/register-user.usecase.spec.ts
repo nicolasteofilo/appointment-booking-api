@@ -49,8 +49,8 @@ describe("RegisterUserUseCase", () => {
 		const useCase = new RegisterUserUseCase(repo, hasherFake);
 
 		const out = await useCase.execute({
-			name: "  Nicolas  ",
-			email: "  NICOLAS@TEST.COM ",
+			name: "  John Doe  ",
+			email: "  johndoe@TEST.COM ",
 			password: "12345678",
 		});
 
@@ -62,15 +62,15 @@ describe("RegisterUserUseCase", () => {
 		const useCase = new RegisterUserUseCase(repo, hasherFake);
 
 		await useCase.execute({
-			name: "Nicolas",
-			email: "nicolas@test.com",
+			name: "John Doe",
+			email: "johndoe@test.com",
 			password: "12345678",
 		});
 
 		await expect(
 			useCase.execute({
 				name: "Other",
-				email: "nicolas@test.com",
+				email: "johndoe@test.com",
 				password: "12345678",
 			}),
 		).rejects.toMatchObject({ statusCode: 409 });
@@ -81,14 +81,14 @@ describe("RegisterUserUseCase", () => {
 		const useCase = new RegisterUserUseCase(repo, hasherFake);
 
 		await useCase.execute({
-			name: "  Nicolas  ",
-			email: "  NICOLAS@TEST.COM ",
+			name: "  John Doe  ",
+			email: "  johndoe@TEST.COM ",
 			password: "12345678",
 		});
 
-		const user = await repo.findByEmail("nicolas@test.com");
+		const user = await repo.findByEmail("johndoe@test.com");
 		expect(user).not.toBeNull();
-		expect(user?.name).toBe("Nicolas");
-		expect(user?.email).toBe("nicolas@test.com");
+		expect(user?.name).toBe("John Doe");
+		expect(user?.email).toBe("johndoe@test.com");
 	});
 });

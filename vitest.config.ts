@@ -6,6 +6,8 @@ export default defineConfig({
 		environment: "node",
 		globals: true,
 		clearMocks: true,
+		sequence: { concurrent: false },
+		setupFiles: ["./vitest.setup.ts"],
 	},
 	resolve: {
 		alias: {
