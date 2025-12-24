@@ -3,6 +3,7 @@
 	"_version": "24.0.0",
 
 	"compilerOptions": {
+		"baseUrl": ".",
 		"lib": [
 			"es2024",
 			"ESNext.Array",
