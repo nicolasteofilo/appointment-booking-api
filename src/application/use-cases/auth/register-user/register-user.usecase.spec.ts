@@ -7,7 +7,7 @@ import type { PasswordHasher } from "@/application/ports/services/password-hashe
 import type { User } from "@/domain/entities/user";
 import { RegisterUserUseCase } from "./register-user.usecase";
 
-function makeRepoFake() {
+function makeUsersRepoFake() {
 	const byEmail = new Map<string, User>();
 
 	const repo: UserRepository = {
@@ -45,7 +45,7 @@ const hasherFake: PasswordHasher = {
 
 describe("RegisterUserUseCase", () => {
 	it("should register a new user and return userId", async () => {
-		const repo = makeRepoFake();
+		const repo = makeUsersRepoFake();
 		const useCase = new RegisterUserUseCase(repo, hasherFake);
 
 		const out = await useCase.execute({
@@ -55,5 +55,40 @@ describe("RegisterUserUseCase", () => {
 		});
 
 		expect(out.userId).toBe("uuid-1");
+	});
+
+	it("should not allow to register with an email that is already in use", async () => {
+		const repo = makeUsersRepoFake();
+		const useCase = new RegisterUserUseCase(repo, hasherFake);
+
+		await useCase.execute({
+			name: "Nicolas",
+			email: "nicolas@test.com",
+			password: "12345678",
+		});
+
+		await expect(
+			useCase.execute({
+				name: "Other",
+				email: "nicolas@test.com",
+				password: "12345678",
+			}),
+		).rejects.toMatchObject({ statusCode: 409 });
+	});
+
+	it("should trim name and normalize email", async () => {
+		const repo = makeUsersRepoFake();
+		const useCase = new RegisterUserUseCase(repo, hasherFake);
+
+		await useCase.execute({
+			name: "  Nicolas  ",
+			email: "  NICOLAS@TEST.COM ",
+			password: "12345678",
+		});
+
+		const user = await repo.findByEmail("nicolas@test.com");
+		expect(user).not.toBeNull();
+		expect(user?.name).toBe("Nicolas");
+		expect(user?.email).toBe("nicolas@test.com");
 	});
 });
