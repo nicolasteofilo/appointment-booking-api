@@ -7,15 +7,25 @@
 		"dev": "tsx watch --env-file=.env ./src/infrastructure/http/server.ts",
 		"build": "tsc",
 		"start": "node dist/server.js",
+
 		"format:check": "biome format --check",
+		"format": "biome format --write .",
 		"check": "biome check --apply",
 		"lint": "biome check .",
 		"lint:fix": "biome check --write .",
-		"format": "biome format --write .",
 		"prepare": "husky",
+
 		"test": "vitest",
 		"test:run": "vitest run",
-		"coverage": "vitest run --coverage"
+		"coverage": "vitest run --coverage",
+
+		"db:generate": "drizzle-kit generate --config=drizzle-dev.config.ts",
+		"db:migrate:dev": "drizzle-kit migrate --config=drizzle-dev.config.ts",
+		"db:migrate:test": "drizzle-kit migrate --config=drizzle-test.config.ts",
+		"db:migrate:prod": "MIGRATE_PROD=true drizzle-kit migrate --config=drizzle-prod.config.ts",
+
+		"db:check:dev": "drizzle-kit check --config=drizzle-dev.config.ts",
+		"db:check:prod": "MIGRATE_PROD=true drizzle-kit check --config=drizzle-prod.config.ts"
 	},
 	"lint-staged": {
 		"*.{ts,tsx,js,jsx,json,jsonc,md,yml,yaml}": [

@@ -4,7 +4,7 @@ import { db, pool } from "./db";
 
 async function main() {
 	await migrate(db, {
-		migrationsFolder: "./src/infrastructure/database/drizzle/migrations",
+		migrationsFolder: "./src/infrastructure/database/migrations",
 	});
 	await pool.end();
 }

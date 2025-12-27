@@ -24,6 +24,9 @@ export const users = pgTable(
 			.defaultNow()
 			.$onUpdate(() => new Date())
 			.notNull(),
+		timezone: varchar("timezone", { length: 64 })
+			.notNull()
+			.default("America/Sao_Paulo"),
 	},
 	(t) => ({
 		emailUq: uniqueIndex("users_email_uq").on(t.email),
