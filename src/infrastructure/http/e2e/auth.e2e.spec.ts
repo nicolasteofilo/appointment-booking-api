@@ -2,7 +2,6 @@ import { faker } from "@faker-js/faker";
 import type { FastifyInstance } from "fastify";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { buildApp } from "@/infrastructure/http/build-app";
-import { authRoutes } from "@/infrastructure/http/routes/auth.routes";
 import { postJson } from "./utils/post-json";
 
 let app: FastifyInstance;
@@ -10,7 +9,6 @@ let baseUrl = "";
 
 beforeAll(async () => {
 	app = buildApp();
-	app.register(authRoutes, { prefix: "/auth" });
 
 	await app.listen({ host: "127.0.0.1", port: 0 });
 

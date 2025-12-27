@@ -27,6 +27,9 @@ describe("Jwt Adapter", () => {
 					id: "any_id",
 				},
 				"ANY_SECRET_VALUE",
+				{
+					expiresIn: "999d",
+				},
 			);
 		});
 		it("should return a token on sign success", async () => {
