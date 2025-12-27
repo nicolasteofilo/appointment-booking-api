@@ -110,7 +110,7 @@ The focus is to practice **backend fundamentals** with a clean, maintainable arc
 - [x] Use-case: `LoginUserUseCase`
 - [x] Route: `POST /auth/login`
 - [x] JWT token generation (access token)
-- [ ] Auth middleware / Fastify plugin
+- [x] Auth middleware / Fastify plugin
 - [ ] Protected route example (e.g. `GET /me`)
 
 **Done when:** you can login and call a protected endpoint.

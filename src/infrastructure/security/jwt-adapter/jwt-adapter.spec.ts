@@ -68,4 +68,27 @@ describe("Jwt Adapter", () => {
 			await expect(promise).rejects.toThrow();
 		});
 	});
+	describe("verifyAccessToken()", () => {
+		it("should call verifyAccessToken with correct values", async () => {
+			const sut = makeSut();
+			const verifyAccessTokenSpy = vi.spyOn(jsonwebtoken, "verify");
+			await sut.verifyAccessToken("any_token");
+			expect(verifyAccessTokenSpy).toHaveBeenCalledWith("any_token", secret);
+		});
+		it("should return a object on verifyAccessToken success", async () => {
+			const sut = makeSut();
+			const out = await sut.verifyAccessToken("any_token");
+			expect(out).toMatchObject({
+				userId: "any_value",
+			});
+		});
+		it("should throw if verifyAccessToken throws", async () => {
+			const sut = makeSut();
+			vi.spyOn(jsonwebtoken, "verify").mockImplementationOnce(() => {
+				throw new Error();
+			});
+			const promise = sut.verifyAccessToken("any_token");
+			await expect(promise).rejects.toThrow();
+		});
+	});
 });
