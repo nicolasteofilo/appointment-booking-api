@@ -67,6 +67,7 @@ export class DrizzleUserRepository implements UserRepository {
 			role: row.role as User["role"],
 			createdAt: row.createdAt,
 			updatedAt: row.updatedAt,
+			timezone: row.timezone,
 		};
 	}
 }

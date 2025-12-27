@@ -5,23 +5,9 @@
 		{
 			"idx": 0,
 			"version": "7",
-			"when": 1766538201087,
-			"tag": "0000_red_whiplash",
-			"breakpoints": false
-		},
-		{
-			"idx": 1,
-			"version": "7",
-			"when": 1766587201416,
-			"tag": "0001_left_stingray",
-			"breakpoints": false
-		},
-		{
-			"idx": 2,
-			"version": "7",
-			"when": 1766862381892,
-			"tag": "0002_legal_ezekiel",
-			"breakpoints": false
+			"when": 1766869492062,
+			"tag": "0000_careful_blue_marvel",
+			"breakpoints": true
 		}
 	]
 }

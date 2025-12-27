@@ -1,0 +1,3 @@
+GET http://localhost:3333/auth/me HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUyNjk0MzY3LTg1Y2ItNDlkNy1iYjE1LTMxZmU5OWZmMWNmMCIsImlhdCI6MTc2Njg2Mzc3OSwiZXhwIjoxODUzMTc3Mzc5fQ.BeOxBnHkwcIBvzUqw6EKVrff3yRpueXw_YYxxJsNahc

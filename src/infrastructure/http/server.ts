@@ -8,7 +8,7 @@ async function startServer() {
 		await app.listen({ port: PORT, host: "0.0.0.0" });
 
 		console.log(`🔥 Server is running on port ${PORT}`);
-		console.log(`📖 API documentation available at ${""}/docs`);
+		console.log(`📖 API documentation available at ${PORT}/docs`);
 	} catch (error) {
 		app.log.error(error);
 		process.exit(1);

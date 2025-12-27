@@ -15,9 +15,10 @@ export class GetMeUseCase {
 
 		return {
 			id: existingUser.id,
-			email: existingUser.email,
 			name: existingUser.name,
+			email: existingUser.email,
 			role: existingUser.role,
+			timezone: existingUser.timezone,
 			createdAt: existingUser.createdAt,
 			updatedAt: existingUser.updatedAt,
 		};
