@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from "vitest";
 vi.mock("jsonwebtoken", () => ({
 	default: {
 		sign: vi.fn().mockResolvedValue("any_token"),
-		verify: vi.fn().mockResolvedValue("any_value"),
+		verify: vi.fn().mockResolvedValue({ id: "any_value" }),
 	},
 }));
 

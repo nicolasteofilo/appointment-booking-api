@@ -5,8 +5,12 @@ import { AppError } from "@/domain/errors/app-error";
 import { authPlugin } from "@/infrastructure/http/plugins/auth.plugin";
 import { authRoutes } from "./routes/auth.routes";
 
-export function buildApp() {
-	const app = fastify({ logger: false });
+type BuildAppOptions = {
+	logger?: boolean;
+};
+
+export function buildApp(options: BuildAppOptions = {}) {
+	const app = fastify({ logger: options.logger ?? true });
 	app.register(cors, { origin: true });
 	app.register(authPlugin);
 

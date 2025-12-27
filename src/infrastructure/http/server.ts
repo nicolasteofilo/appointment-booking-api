@@ -15,4 +15,21 @@ async function startServer() {
 	}
 }
 
+const shutdown = async (signal: string) => {
+	try {
+		await app.close();
+	} finally {
+		console.log(`🛑 Server stopped (${signal})`);
+		process.exit(0);
+	}
+};
+
+process.on("SIGINT", () => {
+	void shutdown("SIGINT");
+});
+
+process.on("SIGTERM", () => {
+	void shutdown("SIGTERM");
+});
+
 startServer();

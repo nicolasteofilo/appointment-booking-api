@@ -11,4 +11,8 @@ export const loginSchema = z.object({
 	password: z.string().min(8).max(72),
 });
 
+export const meSchema = z.object({
+	userId: z.string(),
+});
+
 export type RegisterBody = z.infer<typeof registerSchema>;
