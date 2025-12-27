@@ -1,11 +1,4 @@
-import {
-	index,
-	pgTable,
-	text,
-	timestamp,
-	uuid,
-	varchar,
-} from "drizzle-orm/pg-core";
+import { index, pgTable, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 import { users } from "./users";
 
 export const bookings = pgTable(
@@ -17,9 +10,12 @@ export const bookings = pgTable(
 			.notNull()
 			.references(() => users.id, { onDelete: "cascade" }),
 
-		guestId: uuid("guest_id")
-			.notNull()
-			.references(() => users.id, { onDelete: "cascade" }),
+		guestUserId: uuid("guest_user_id").references(() => users.id, {
+			onDelete: "set null",
+		}),
+
+		guestName: varchar("guest_name", { length: 120 }),
+		guestEmail: varchar("guest_email", { length: 255 }),
 
 		startsAt: timestamp("starts_at", {
 			withTimezone: true,
@@ -30,13 +26,7 @@ export const bookings = pgTable(
 			mode: "date",
 		}).notNull(),
 
-		status: varchar("status", { length: 20 }).notNull().default("pending"), // pending|confirmed|canceled
-
-		canceledAt: timestamp("canceled_at", { withTimezone: true, mode: "date" }),
-		cancelReason: text("cancel_reason"),
-
-		title: varchar("title", { length: 120 }),
-		notes: text("notes"),
+		status: varchar("status", { length: 20 }).notNull().default("pending"),
 
 		createdAt: timestamp("created_at", { withTimezone: true, mode: "date" })
 			.defaultNow()
@@ -52,6 +42,7 @@ export const bookings = pgTable(
 			t.hostId,
 			t.startsAt,
 		),
-		guestIdx: index("bookings_guest_idx").on(t.guestId),
+		guestUserIdx: index("bookings_guest_user_idx").on(t.guestUserId),
+		guestEmailIdx: index("bookings_guest_email_idx").on(t.guestEmail),
 	}),
 );

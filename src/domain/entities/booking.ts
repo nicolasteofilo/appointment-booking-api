@@ -3,19 +3,16 @@ export type BookingStatus = "pending" | "confirmed" | "canceled";
 export interface Booking {
 	id: string;
 
-	hostId: string; // provider / who receives the booking
-	guestId: string; // client / who creates the booking
+	hostId: string;
 
-	startsAt: Date; // stored in UTC
-	endsAt: Date; // stored in UTC
+	guestUserId: string | null; // authenticated users
+	guestName: string | null; // not authenticated users
+	guestEmail: string | null; // not authenticated users
 
-	status: BookingStatus;
+	startsAt: Date;
+	endsAt: Date;
 
-	canceledAt: Date | null;
-	cancelReason: string | null;
-
-	title: string | null;
-	notes: string | null;
+	status: "pending" | "confirmed" | "canceled";
 
 	createdAt: Date;
 	updatedAt: Date;
