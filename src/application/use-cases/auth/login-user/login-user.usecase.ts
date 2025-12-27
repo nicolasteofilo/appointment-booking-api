@@ -1,6 +1,6 @@
 import type { UserRepository } from "@/application/ports/repositories/user-repository";
-import type { Encrypter } from "@/application/ports/services/encrypter";
-import type { PasswordHasher } from "@/application/ports/services/password-hasher";
+import type { Encrypter } from "@/application/ports/services/security/encrypter";
+import type { PasswordHasher } from "@/application/ports/services/security/password-hasher";
 import { EmailOrPasswordAreIncorrect } from "@/domain/errors/email-or-password-are-incorrect-error";
 import type { LoginUserInput, LoginUserOutput } from "./login-user.dto";
 

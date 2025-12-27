@@ -107,9 +107,9 @@ The focus is to practice **backend fundamentals** with a clean, maintainable arc
 ---
 
 ### Milestone 3 — Auth (Login + JWT)
-- [ ] Use-case: `LoginUserUseCase`
-- [ ] Route: `POST /auth/login`
-- [ ] JWT token generation (access token)
+- [x] Use-case: `LoginUserUseCase`
+- [x] Route: `POST /auth/login`
+- [x] JWT token generation (access token)
 - [ ] Auth middleware / Fastify plugin
 - [ ] Protected route example (e.g. `GET /me`)
 

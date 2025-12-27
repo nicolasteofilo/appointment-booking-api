@@ -1,8 +1,10 @@
 import type { FastifyInstance } from "fastify";
+import { r } from "node_modules/@faker-js/faker/dist/airline-DF6RqYmq";
 import type { LoginUserUseCase } from "@/application/use-cases/auth/login-user/login-user.usecase";
 import type { RegisterUserUseCase } from "@/application/use-cases/auth/register-user/register-user.usecase";
 import { loginUserFactory } from "@/infrastructure/factories/auth/login-user.factory";
 import { registerUserFactory } from "@/infrastructure/factories/auth/register-user.factory";
+import { requireRole } from "@/infrastructure/http/guards/require-role.guard";
 import { loginSchema, registerSchema } from "../schemas/auth.schema";
 
 type AuthRoutesDeps = {
@@ -28,4 +30,14 @@ export async function authRoutes(
 		const out = await loginUserUseCase.execute(body);
 		return reply.code(200).send(out);
 	});
+
+	app.post(
+		"/admin",
+		{ preHandler: [app.authenticate, requireRole(["guest"])] },
+		(_req, reply) => {
+			return reply.code(200).send({
+				ok: true,
+			});
+		},
+	);
 }

@@ -1,5 +1,5 @@
 import type { UserRepository } from "@/application/ports/repositories/user-repository";
-import type { PasswordHasher } from "@/application/ports/services/password-hasher";
+import type { PasswordHasher } from "@/application/ports/services/security/password-hasher";
 import { EmailAlreadyInUseError } from "@/domain/errors/email-already-in-use-error";
 
 import type {

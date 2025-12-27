@@ -47,6 +47,7 @@
 		"dotenv": "^17.2.3",
 		"drizzle-orm": "^0.45.1",
 		"fastify": "^5.6.2",
+		"fastify-plugin": "^5.1.0",
 		"fastify-type-provider-zod": "^6.1.0",
 		"husky": "^9.1.7",
 		"jsonwebtoken": "^9.0.3",

@@ -3,8 +3,8 @@ import type {
 	NewUser,
 	UserRepository,
 } from "@/application/ports/repositories/user-repository";
-import type { Encrypter } from "@/application/ports/services/encrypter";
-import type { PasswordHasher } from "@/application/ports/services/password-hasher";
+import type { Encrypter } from "@/application/ports/services/security/encrypter";
+import type { PasswordHasher } from "@/application/ports/services/security/password-hasher";
 import type { User } from "@/domain/entities/user";
 import type { LoginUserInput } from "./login-user.dto";
 import { LoginUserUseCase } from "./login-user.usecase";
