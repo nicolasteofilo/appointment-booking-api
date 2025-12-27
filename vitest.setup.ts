@@ -4,12 +4,12 @@ import { migrate } from "drizzle-orm/node-postgres/migrator";
 import type { Pool } from "pg";
 import { afterAll, beforeAll, beforeEach } from "vitest";
 
-config({ path: ".env.test", override: true });
+config({ path: ".env.test", override: true, quiet: true });
 
 let pool: Pool;
+// biome-ignore lint: true
 let db: any;
 
-// Run migrations and setup/teardown hooks for tests
 beforeAll(async () => {
 	const mod = await import("./src/infrastructure/database/drizzle/db.js");
 	db = mod.db;
@@ -23,10 +23,10 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
-	// clear state between tests (adapt if you have more tables later)
 	await pool.query('TRUNCATE TABLE "users" CASCADE;');
 });
 
 afterAll(async () => {
+	await pool.query('TRUNCATE TABLE "users" CASCADE;');
 	await pool.end();
 });

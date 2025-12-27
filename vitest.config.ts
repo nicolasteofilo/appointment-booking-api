@@ -8,6 +8,9 @@ export default defineConfig({
 		clearMocks: true,
 		sequence: { concurrent: false },
 		setupFiles: ["./vitest.setup.ts"],
+		coverage: {
+			provider: "v8", // or 'istanbul'
+		},
 	},
 	resolve: {
 		alias: {
